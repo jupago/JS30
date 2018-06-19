@@ -14,6 +14,21 @@
             <div class="hand hour-hand"></div>
             <div class="hand min-hand"></div>
             <div class="hand second-hand"></div>
+            <div class="numbers">
+                <span>12</span>
+                <span>1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+                <span>6</span>
+                <span>7</span>
+                <span>8</span>
+                <span>9</span>
+                <span>10</span>
+                <span>11</span>
+            </div>
+
         </div>
     </div>
 
@@ -39,16 +54,17 @@
         .clock {
             width: 30rem;
             height: 30rem;
-            border: 20px solid white;
+            border: 1px solid white;
             border-radius: 50%;
             margin: 50px auto;
             position: relative;
             padding: 2rem;
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1),
-            inset 0 0 0 3px #EFEFEF,
-            inset 0 0 10px black,
-            0 0 10px rgba(0, 0, 0, 0.2);
+            outline: solid 1px #ffffff;
+            outline-offset: -9rem;
+            /* transform: perspective(40vw) rotateY(30deg) rotateX(20deg); */
+            /* background: linear-gradient(135deg, rgba(241, 241, 241, 1) 0%, rgba(241, 241, 241, 0) 100%); */
         }
+
 
         .clock-face {
             position: relative;
@@ -61,13 +77,141 @@
         .hand {
             width: 50%;
             height: 6px;
-            background: black;
+            background: #333333;
             position: absolute;
             top: 50%;
             transform-origin: 100%;
             transform: rotate(90deg);
             transition: all 0.05s;
             transition-timing-function: cubic-bezier(0.1, 2.8, 0.7, 1);
+        }
+
+
+        /* numbers traditional way */
+
+        /* .numbers span {
+            font: 24px Monaco, MonoSpace;
+            height: 50%;
+            position: absolute;
+            left: 47%;
+            transform-origin: bottom center;
+            line-height: 0;
+        }
+
+        .numbers span:nth-of-type(2n) {
+            transform: rotate(30deg);
+        }
+
+        .numbers span:nth-of-type(3n) {
+            transform: rotate(60deg);
+        }
+
+        .numbers span:nth-of-type(4n) {
+            transform: rotate(90deg);
+        }
+
+        .numbers span:nth-of-type(5n) {
+            transform: rotate(120deg);
+        }
+
+        .numbers span:nth-of-type(6n) {
+            transform: rotate(150deg);
+        }
+
+        .numbers span:nth-of-type(7n) {
+            transform: rotate(180deg);
+        }
+
+        .numbers span:nth-of-type(8n) {
+            transform: rotate(210deg);
+        }
+
+        .numbers span:nth-of-type(9n) {
+            transform: rotate(240deg);
+        }
+
+        .numbers span:nth-of-type(10n) {
+            transform: rotate(270deg);
+        }
+
+        .numbers span:nth-of-type(11n) {
+            transform: rotate(300deg);
+        }
+
+        .numbers span:nth-of-type(12n) {
+            transform: rotate(330deg);
+        } */
+
+        /* numbers with grid */
+
+        .numbers {
+
+            display: grid;
+            grid-template-areas: ". . doce doce . ." ". once . . uno ." "nueve diez . . dos tres" "nueve ocho . .cuatro tres" ". siete . . cinco . "". . seis seis . .";
+            grid-template-columns: 1fr 3fr 4fr 4fr 3fr 1fr;
+            grid-template-rows: 1fr 3fr 4fr 4fr 3fr 1fr;
+            height: 30rem;
+            width: 30rem;
+            /* transform: translateY(-2rem) translateX(-2rem); */
+        }
+
+
+        .numbers span:nth-of-type(1) {
+            grid-area: doce;
+        }
+
+        .numbers span:nth-of-type(2) {
+            grid-area: uno;
+            margin-right: auto;
+        }
+
+        .numbers span:nth-of-type(3n) {
+            grid-area: dos;
+            margin: 0 0 auto auto;
+        }
+
+        .numbers span:nth-of-type(4n) {
+            grid-area: tres;
+            margin: auto;
+        }
+
+        .numbers span:nth-of-type(5n) {
+            grid-area: cuatro;
+            margin: auto 0 0 auto;
+        }
+
+        .numbers span:nth-of-type(6n) {
+            grid-area: cinco;
+            margin: auto 0 0 auto;
+        }
+
+        .numbers span:nth-of-type(7n) {
+            grid-area: seis;
+        }
+
+        .numbers span:nth-of-type(8n) {
+            grid-area: siete;
+            margin: auto 0 0 auto;
+        }
+
+        .numbers span:nth-of-type(9n) {
+            grid-area: ocho;
+            margin: auto auto 0 0;
+        }
+
+        .numbers span:nth-of-type(10n) {
+            grid-area: nueve;
+            margin: auto;
+        }
+
+        .numbers span:nth-of-type(11n) {
+            grid-area: diez;
+            margin: 0 auto auto 0;
+        }
+
+        .numbers span:nth-of-type(12n) {
+            grid-area: once;
+            margin: 0 0 0 auto;
         }
     </style>
 
@@ -88,7 +232,7 @@
             minsHand.style.transform = `rotate(${minsDegrees}deg)`;
 
             const hour = now.getMinutes();
-            const hourDegrees = ((mins / 12) * 360) + 90;
+            const hourDegrees = ((hours / 12) * 360) + 90;
             hourHand.style.transform = `rotate(${hourDegrees}deg)`;
         }
         setInterval(setDate, 1000);
